@@ -35,11 +35,14 @@ public class LockTask extends CordovaPlugin {
         if (!activityManager.isInLockTaskMode()) {
 
           if (!adminClassName.isEmpty()) {
+            callbackMessage(false, "not empty");
 
             DevicePolicyManager mDPM = (DevicePolicyManager) activity.getSystemService(Context.DEVICE_POLICY_SERVICE);
             ComponentName mDeviceAdmin = new ComponentName(activity.getPackageName(), activity.getPackageName() + "." + adminClassName);
 
             if (mDPM.isDeviceOwnerApp(activity.getPackageName())) {
+              callbackMessage(false, "device owner app");
+
               String[] packages = {activity.getPackageName()};
               mDPM.setLockTaskPackages(mDeviceAdmin, packages);
             }
